@@ -1,4 +1,7 @@
-console.log('app is running!');
+import SearchInput from './SearchInput.js';
+import SearchResult from './SearchResult.js';
+import ImageInfo from './ImageInfo.js';
+import api from './api.js';
 
 class App {
   $target = null;
@@ -40,3 +43,5 @@ class App {
     this.searchResult.setState(nextData);
   }
 }
+
+export default App;

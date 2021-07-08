@@ -28,7 +28,7 @@ class ImageInfo {
             <span>${name}</span>
             <div class="close">x</div>
           </div>
-          <img src="${url}" alt="${name}"/>        
+          <img src="${url}" alt="${name}"/>
           <div class="description">
             <div>성격: ${temperament}</div>
             <div>태생: ${origin}</div>
@@ -40,3 +40,5 @@ class ImageInfo {
     }
   }
 }
+
+export default ImageInfo;

@@ -1,10 +1,14 @@
+import { getStorage } from './utils/localStorage.js';
+
 const TEMPLATE = '<input type="text">';
 
 class SearchInput {
   constructor({ $target, onSearch }) {
     const $searchInput = document.createElement('input');
     this.$searchInput = $searchInput;
-    this.$searchInput.placeholder = '고양이를 검색해보세요.';
+
+    // 페이지를 새로고침해도 마지막 검색 결과 화면이 유지되도록 처리
+    this.setSearchInputText();
 
     $searchInput.className = 'SearchInput';
     $target.appendChild($searchInput);
@@ -24,6 +28,17 @@ class SearchInput {
 
     console.log('SearchInput created.', this);
   }
+
+  setSearchInputText() {
+    const searchHistory = getStorage().getItem('searchHistory');
+
+    if (!searchHistory) {
+      this.$searchInput.placeholder = '고양이를 검색해보세요.';
+    } else {
+      this.$searchInput.value = JSON.parse(searchHistory).pop();
+    }
+  }
+
   render() {}
 }
 

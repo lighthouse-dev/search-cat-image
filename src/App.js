@@ -19,7 +19,8 @@ class App {
         this.isLoading.setState(true);
 
         // 검색 시 키워드를 로컬스토리지에 저장
-        const historyList = getStorage().getItem('searchHistory') || [];
+        const historyList =
+          JSON.parse(getStorage().getItem('searchHistory')) || [];
         historyList.push(keyword);
         getStorage().setItem('searchHistory', JSON.stringify(historyList));
 

@@ -1,6 +1,7 @@
 import SearchInput from './SearchInput.js';
 import SearchResult from './SearchResult.js';
 import ImageInfo from './ImageInfo.js';
+import Loading from './components/Loading.js';
 import api from './api.js';
 
 class App {
@@ -13,11 +14,20 @@ class App {
     this.searchInput = new SearchInput({
       $target,
       onSearch: keyword => {
-        api.fetchCats(keyword).then(({ data }) => {
-          data && this.setState(data);
-        });
+        this.isLoading.setState(true);
+
+        api
+          .fetchCats(keyword)
+          .then(({ data }) => {
+            data && this.setState(data);
+          })
+          .finally(() => {
+            this.isLoading.setState(false);
+          });
       }
     });
+
+    this.isLoading = new Loading({ $target, data: this.data.length });
 
     this.searchResult = new SearchResult({
       $target,
